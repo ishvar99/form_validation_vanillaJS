@@ -73,6 +73,8 @@ h2{
 }
 .form input[type=submit]
 {
+    cursor: pointer;
+    outline: none;
     margin-top: 20px;
     background-color: #3498db;
     border: none;
