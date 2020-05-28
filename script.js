@@ -9,6 +9,10 @@ function checkValidEmail(email){
     return re.test(String(email).toLowerCase());
 }
 
+function getFieldName(input){
+    return input.id.charAt(0).toUpperCase()+input.id.slice(1);
+}
+
 function showError(input,message){
     const formControl= input.parentElement;
     formControl.className='form-control error';
@@ -20,34 +24,15 @@ function showSuccess(input){
     formControl.className='form-control success'
 }
 
+function checkList(inputArr){
+    inputArr.forEach((input)=>{
+        if(input.value.trim()===''){
+            showError(input,`${getFieldName(input)} is required`)
+        }
+    })
+}
+
 form.addEventListener('submit',(e)=>{
-    console.log('Submitted')
    e.preventDefault();
-   if(username.value===''){
-     showError(username,'username is required')
-   } 
-   else{
-       showSuccess(username);
-   }   
-   if(email.value===''){
-     showError(email,'email is required')
-   } 
-   else if(!checkValidEmail(email.value)){
-    showError(email,'email is not valid');
-    }
-   else{
-           showSuccess(email)
-   }   
-   if(password.value===''){
-     showError(password,'password is required')
-   } 
-   else{
-       showSuccess(password);
-   }   
-   if(password2.value===''){
-     showError(password2,'password is required')
-   } 
-   else{
-       showSuccess(password2);
-   }   
+   checkList([username,email,password,password2]);
 })
